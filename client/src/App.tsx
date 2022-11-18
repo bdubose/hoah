@@ -1,12 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
-import  { Test } from '../../common/models/test'
+import { useGetTestQuery } from './api';
 
 function App() {
-  const testobj: Test = {
-    id: 6,
-    message: 'hi gurl'
-  };
+  const { data: testObj } = useGetTestQuery();
+
+
   return (
     <div className="App">
       <header className="App-header">
@@ -20,7 +19,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React with id: {testobj.id} and message: {testobj.message}
+          Learn React with id: {testObj?.id} and message: {testObj?.message}
         </a>
       </header>
     </div>

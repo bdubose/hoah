@@ -1,5 +1,6 @@
 import { Test } from "common/models/test";
-import { Express, static as eStatic } from "express";
+import { Express, Router } from "express";
+import express from 'express';
 import path from 'path';
 
 export class Server {
@@ -7,19 +8,13 @@ export class Server {
 
     constructor(app: Express) {
         this.app = app;
-
-        this.app.use(eStatic(path.resolve('./') + '/build/frontend'));
-
-        this.app.get('/api', (req, res) => {
+        app.use(express.static(path.join('build', 'client')));
+        app.get('/api/test', (req, res) => {
             const message: Test = {
-                id: 6,
-                message: 'Hello world!',
+                id: 22,
+                message: 'from the serverside',
             };
             res.send(message);
-        });
-
-        this.app.get('*', (req, res) => {
-            res.sendFile(path.resolve('./') + '/build/frontend/index.html');
         });
     }
 
