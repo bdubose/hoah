@@ -1,8 +1,12 @@
-import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import  { Test } from '../../common/models/test'
 
 function App() {
+  const testobj: Test = {
+    id: 6,
+    message: 'hi gurl'
+  };
   return (
     <div className="App">
       <header className="App-header">
@@ -16,7 +20,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Learn React with id: {testobj.id} and message: {testobj.message}
         </a>
       </header>
     </div>
