@@ -1,0 +1,22 @@
+﻿
+.layout {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav {
+    background: var(--dark-bg);
+    padding: 1rem;
+}
+
+.navLink {
+    margin-right: 0.5rem;
+}
+
+.activeLink {
+    color: #fff;
+}
+
+.main {
+    padding: 0 1rem;
+}

@@ -1,0 +1,27 @@
+﻿
+.grid {
+    width: 100%;
+    border-spacing: 0;
+}
+
+.th {
+    text-align: start;
+    padding: 0.5rem;
+}
+
+.row {
+    transition: box-shadow 0.2s ease-in-out,
+        background-color 0.2s ease-in-out;
+}
+
+.row:hover {
+    background-color: var(--primary-hover);
+    box-shadow: 0 0 10px var(--primary-hover);
+    
+    cursor: pointer;
+}
+
+.cell {
+    border-top: 2px solid white;
+    padding: 0.5rem;
+}

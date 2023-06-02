@@ -1,0 +1,22 @@
+﻿
+.actionsContainer {
+    padding: 2rem;
+    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.action {
+    padding: 2rem;
+    margin: 1rem;
+    min-width: 20rem;
+    
+    background-image: linear-gradient(to right, var(--bg-color), var(--primary), var(--bg-color));
+    border: none;
+    border-radius: 30px;
+}
+
+.action:hover {
+    background-image: none;
+}
