@@ -2,15 +2,20 @@ create table if not exists properties
 ( property_id   serial not null primary key
 , street_number smallint not null
 , street        text not null
+, lot_num       text
+, sector        text
+, map_book      text
+, page          text
 );
 
 create table if not exists homeowners
 ( homeowner_id      serial not null primary key
 , property_id       int not null references properties(property_id) on delete cascade
 , full_name         text not null
-, email             text not null
+, email             text null
+, phone             text null
 , move_in_date      date not null default current_date
-, move_out_date     date
+, move_out_date     date null
 );
 
 
