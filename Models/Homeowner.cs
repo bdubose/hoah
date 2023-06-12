@@ -12,4 +12,6 @@ public class Homeowner
     public string? Phone { get; set; }
     public string MoveInDate { get; set; } = "";
     public string? MoveOutDate { get; set; }
+
+    [Write(false)] public string Property { get; set; } = "";
 }

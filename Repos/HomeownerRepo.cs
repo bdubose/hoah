@@ -1,5 +1,4 @@
 ﻿using Dapper;
-using Dapper.Contrib.Extensions;
 using HoahServer.Models;
 using HoahServer.Services;
 
@@ -12,7 +11,10 @@ public class HomeownerRepo : BaseRepo
     public async Task<IEnumerable<Homeowner>> GetAll()
     {
         using var con = Db.Con;
-        return await con.GetAllAsync<Homeowner>();
+        return await con.QueryAsync<Homeowner>(@"
+            select h.*, concat(p.street_number, ' ', p.street) as property
+            from homeowners h
+            join properties p on h.property_id = p.property_id");
     }
 
     public async Task<int> Add(Homeowner homeowner)

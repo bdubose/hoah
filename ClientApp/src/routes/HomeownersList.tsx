@@ -13,7 +13,7 @@ export const HomeownersList = () => {
     </div>
     <Grid entities={homeowners ?? []} config={[
       { title: 'Id', value: ho => ho.homeownerId },
-      { title: 'Property Id', value: ho => ho.propertyId },
+      { title: 'Property', value: ho => ho.property },
       { title: 'Name', value: ho => ho.fullName },
       { title: 'Email', value: ho => ho.email },
     ]}/>
