@@ -15,3 +15,12 @@ public class Homeowner
 
     [Write(false)] public string Property { get; set; } = "";
 }
+
+public class HomeownerDetails : Homeowner
+{
+    public new Property Property { get; set; } = new();
+    public IEnumerable<Fee> Fees { get; set; } = new List<Fee>();
+    public IEnumerable<Payment> Payments { get; set; } = new List<Payment>();
+    public IEnumerable<Lien> Liens { get; set; } = new List<Lien>();
+    public IEnumerable<Note> PropertyNotes { get; set; } = new List<Note>();
+}

@@ -1,7 +1,7 @@
 ﻿import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import {Property} from "./models/Property.ts";
 import {Lien} from "./models/Lien.ts";
-import {Homeowner} from "./models/Homeowner.ts";
+import { Homeowner, HomeownerDetails } from "./models/Homeowner.ts";
 import { Payment } from "./models/Payment.ts";
 
 enum Tags {
@@ -25,6 +25,10 @@ export const api = createApi({
             query: id => `/Homeowners/${id}`,
             providesTags: [ Tags.Homeowner ],
         }),
+        getHomeownerDetails: builder.query<HomeownerDetails, number>({
+            query: id => `/Homeowners/Details/${id}`,
+            providesTags: [ Tags.Homeowner ],
+        }),
         updateHomeowner: builder.mutation<number, Homeowner>({
             query: homeowner => ({
                 url: '/Homeowners',
@@ -45,7 +49,7 @@ export const api = createApi({
                 method: 'post',
                 body: payment,
             }),
-            invalidatesTags: [ Tags.Property ]
+            invalidatesTags: [ Tags.Homeowner ]
         }),
         
         getAllProperties: builder.query<Property[], void>({
@@ -69,6 +73,7 @@ export const api = createApi({
 export const {
     useGetAllHomeownersQuery,
     useGetHomeownerQuery,
+    useGetHomeownerDetailsQuery,
     useUpdateHomeownerMutation,
     
     useGetAllLiensQuery,

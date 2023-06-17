@@ -26,6 +26,48 @@ public class HomeownerRepo : BaseRepo
             where h.homeowner_id = @id",
             new { id });
     }
+    public async Task<HomeownerDetails> GetDetails(int id)
+    {
+        using var con = Db.Con;
+        using var multi = await con.QueryMultipleAsync(@"
+            select h.*
+            from homeowners h
+            where h.homeowner_id = @id
+            ;
+            select p.*
+            from properties p
+            join homeowners h on p.property_id = h.property_id
+            where h.homeowner_id = @id
+            ;
+            select f.*, ft.fee_type_name
+            from fees f
+            join fee_types ft on f.fee_type_id = ft.fee_type_id
+            where f.homeowner_id = @id
+            ;
+            select p.*
+            from payments p
+            where p.homeowner_id = @id
+            ;
+            select l.*
+            from liens l
+            where l.homeowner_id = @id
+            ;
+            select n.*
+            from notes n
+            join properties p on n.property_id = p.property_id
+            join homeowners h on p.property_id = h.property_id
+            where h.homeowner_id = @id",
+            new { id });
+
+        var homeownerDetails = await multi.ReadSingleAsync<HomeownerDetails>();
+        homeownerDetails.Property = await multi.ReadSingleAsync<Property>();
+        homeownerDetails.Fees = await multi.ReadAsync<Fee>();
+        homeownerDetails.Payments = await multi.ReadAsync<Payment>();
+        homeownerDetails.Liens = await multi.ReadAsync<Lien>();
+        homeownerDetails.PropertyNotes = await multi.ReadAsync<Note>();
+        
+        return homeownerDetails;
+    }
 
     public async Task<int> Add(Homeowner homeowner)
     {

@@ -1,5 +1,4 @@
 ﻿using Dapper;
-using Dapper.Contrib.Extensions;
 using HoahServer.Models;
 using HoahServer.Services;
 
@@ -7,6 +6,7 @@ namespace HoahServer.Repos;
 
 public class PropertyRepo : BaseRepo
 {
+    // TODO: fix: properties can have multiple homeowners
     public PropertyRepo(DbService db) : base(db) { }
 
     public async Task<IEnumerable<Property>> GetAll()

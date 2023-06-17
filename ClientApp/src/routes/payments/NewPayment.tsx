@@ -37,7 +37,7 @@ export const NewPayment = () => {
     }).unwrap();
     
     if (goToProperty) {
-      navigate(`/Properties/${homeowner.propertyId}`);
+      navigate(`/Homeowners/Details/${homeowner.homeownerId}`);
     } else {
       setState(initialState);
     }
@@ -69,7 +69,7 @@ export const NewPayment = () => {
         Reference
         <input type="text" value={payment.reference} onChange={e => setPayment('reference', e.target.value)}/>
       </label>
-      <button type='button' onClick={() => save()}>Save and Go to Property</button>
+      <button type='button' onClick={() => save()}>Save and Go to Homeowner</button>
       <button type='button' onClick={() => save(undefined, false)}>Save and Add Another</button>
     </form>
   </>

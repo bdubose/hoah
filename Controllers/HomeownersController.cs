@@ -27,6 +27,12 @@ public class HomeownersController : ControllerBase
         return await _homeowners.GetById(id);
     }
 
+    [HttpGet("Details/{id:int}")]
+    public async Task<HomeownerDetails> GetDetails(int id)
+    {
+        return await _homeowners.GetDetails(id);
+    }
+
     [HttpPost]
     public async Task<int> Add([FromBody] Homeowner homeowner)
     {

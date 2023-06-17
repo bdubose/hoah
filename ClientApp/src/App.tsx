@@ -7,6 +7,7 @@ import { LiensList } from "./routes/liens/LiensList.tsx";
 import { HomeownersList } from "./routes/homeowners/HomeownersList.tsx";
 import { HomeownersEdit } from "./routes/homeowners/HomeownersEdit.tsx";
 import { NewPayment } from "./routes/payments/NewPayment.tsx";
+import { HomeownersDetails } from "./routes/homeowners/details/HomeownersDetails.tsx";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
 
           <Route path='/Homeowners' element={<HomeownersList/>}/>
           <Route path='/Homeowners/:action' element={<HomeownersEdit/>}/>
+          <Route path='/Homeowners/Details/:id' element={<HomeownersDetails/>}/>
 
           <Route path='/Liens' element={<LiensList/>}/>
 

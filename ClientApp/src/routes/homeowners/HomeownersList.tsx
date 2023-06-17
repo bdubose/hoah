@@ -18,6 +18,7 @@ export const HomeownersList = () => {
       { title: 'Email', value: ho => ho.email },
       { title: '', value: ho => <>
           <Link to={`/Homeowners/${ho.homeownerId}`}>Edit</Link>
+          <Link to={`/Homeowners/Details/${ho.homeownerId}`}>Details</Link>
       </>}
     ]}/>
   </>
