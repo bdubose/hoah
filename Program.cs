@@ -11,6 +11,7 @@ builder.Services.AddScoped<DbService>();
 builder.Services.AddScoped<LienRepo>();
 builder.Services.AddScoped<PropertyRepo>();
 builder.Services.AddScoped <HomeownerRepo>();
+builder.Services.AddScoped<PaymentRepo>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

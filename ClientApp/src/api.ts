@@ -2,6 +2,7 @@
 import {Property} from "./models/Property.ts";
 import {Lien} from "./models/Lien.ts";
 import {Homeowner} from "./models/Homeowner.ts";
+import { Payment } from "./models/Payment.ts";
 
 enum Tags {
     Homeowner = 'Homeowner',
@@ -38,6 +39,15 @@ export const api = createApi({
             query: () => '/Liens'
         }),
         
+        addPayment: builder.mutation<void, Payment>({
+            query: payment => ({
+                url: '/Payments',
+                method: 'post',
+                body: payment,
+            }),
+            invalidatesTags: [ Tags.Property ]
+        }),
+        
         getAllProperties: builder.query<Property[], void>({
             query: () => '/Properties'
         }),
@@ -62,6 +72,8 @@ export const {
     useUpdateHomeownerMutation,
     
     useGetAllLiensQuery,
+    
+    useAddPaymentMutation,
     
     useGetAllPropertiesQuery,
     useGetPropertyQuery,
