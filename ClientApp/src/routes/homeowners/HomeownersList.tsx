@@ -1,5 +1,5 @@
-﻿import {useGetAllHomeownersQuery} from "../api.ts";
-import {Grid} from "../components/Grid.tsx";
+﻿import {useGetAllHomeownersQuery} from "../../api.ts";
+import {Grid} from "../../components/Grid.tsx";
 import {Link} from "react-router-dom";
 import styles from './HomeownersList.module.css';
 

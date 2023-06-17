@@ -1,8 +1,8 @@
 ﻿import { useNavigate, useParams } from "react-router";
-import { useGetAllPropertiesQuery, useGetHomeownerQuery, useUpdateHomeownerMutation } from "../api.ts";
+import { useGetAllPropertiesQuery, useGetHomeownerQuery, useUpdateHomeownerMutation } from "../../api.ts";
 import { skipToken } from "@reduxjs/toolkit/query";
-import { useObjectState } from "../hooks.ts";
-import { Homeowner } from "../models/Homeowner.ts";
+import { useObjectState } from "../../hooks.ts";
+import { Homeowner } from "../../models/Homeowner.ts";
 import { FormEvent } from "react";
 
 export const HomeownersEdit = () => {

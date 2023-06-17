@@ -1,5 +1,5 @@
-﻿import {useGetAllLiensQuery} from "../api.ts";
-import {Grid} from "../components/Grid.tsx";
+﻿import {useGetAllLiensQuery} from "../../api.ts";
+import {Grid} from "../../components/Grid.tsx";
 
 export const LiensList = () => {
   const { data: liens } = useGetAllLiensQuery();

@@ -15,6 +15,9 @@
     background-image: linear-gradient(to right, var(--bg-color), var(--primary), var(--bg-color));
     border: none;
     border-radius: 30px;
+    
+    color: white;
+    text-align: center;
 }
 
 .action:hover {

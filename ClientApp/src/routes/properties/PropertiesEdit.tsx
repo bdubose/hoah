@@ -1,8 +1,8 @@
 ﻿import { useNavigate, useParams } from "react-router";
-import { useGetPropertyQuery, useUpdatePropertyMutation } from "../api.ts";
+import { useGetPropertyQuery, useUpdatePropertyMutation } from "../../api.ts";
 import { skipToken } from "@reduxjs/toolkit/query";
-import { useObjectState } from "../hooks.ts";
-import { Property } from "../models/Property.ts";
+import { useObjectState } from "../../hooks.ts";
+import { Property } from "../../models/Property.ts";
 import { FormEvent } from "react";
 
 const streets = [

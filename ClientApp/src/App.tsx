@@ -1,11 +1,12 @@
 import { Routes, Route } from 'react-router';
 import { Home } from "./routes/Home.tsx";
-import { PropertiesList } from "./routes/PropertiesList.tsx";
-import { PropertiesEdit } from "./routes/PropertiesEdit.tsx";
+import { PropertiesList } from "./routes/properties/PropertiesList.tsx";
+import { PropertiesEdit } from "./routes/properties/PropertiesEdit.tsx";
 import { Layout } from "./Layout.tsx";
-import { LiensList } from "./routes/LiensList.tsx";
-import { HomeownersList } from "./routes/HomeownersList.tsx";
-import { HomeownersEdit } from "./routes/HomeownersEdit.tsx";
+import { LiensList } from "./routes/liens/LiensList.tsx";
+import { HomeownersList } from "./routes/homeowners/HomeownersList.tsx";
+import { HomeownersEdit } from "./routes/homeowners/HomeownersEdit.tsx";
+import { CreatePayment } from "./routes/payments/CreatePayment.tsx";
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
 
           <Route path='/Liens' element={<LiensList/>}/>
 
+          <Route path='/Payments/Create' element={<CreatePayment/>}/>
+          
           <Route path='/Properties' element={<PropertiesList/>}/>
           <Route path='/Properties/:action' element={<PropertiesEdit/>}/>
         </Routes>
