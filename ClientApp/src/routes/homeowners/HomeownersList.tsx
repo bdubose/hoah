@@ -16,6 +16,9 @@ export const HomeownersList = () => {
       { title: 'Property', value: ho => ho.property },
       { title: 'Name', value: ho => ho.fullName },
       { title: 'Email', value: ho => ho.email },
+      { title: '', value: ho => <>
+          <Link to={`/Homeowners/${ho.homeownerId}`}>Edit</Link>
+      </>}
     ]}/>
   </>
 }

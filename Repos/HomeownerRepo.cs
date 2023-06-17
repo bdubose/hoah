@@ -16,6 +16,16 @@ public class HomeownerRepo : BaseRepo
             from homeowners h
             join properties p on h.property_id = p.property_id");
     }
+    public async Task<Homeowner> GetById(int id)
+    {
+        using var con = Db.Con;
+        return await con.QuerySingleAsync<Homeowner>(@"
+            select h.*, concat(p.street_number, ' ', p.street) as property
+            from homeowners h
+            join properties p on h.property_id = p.property_id
+            where h.homeowner_id = @id",
+            new { id });
+    }
 
     public async Task<int> Add(Homeowner homeowner)
     {
@@ -26,4 +36,5 @@ public class HomeownerRepo : BaseRepo
             returning homeowner_id",
             homeowner);
     }
+
 }

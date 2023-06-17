@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 export const Home = () => (
     <div className={styles.actionsContainer}>
-      <Link to='/Payments/Create'>
+      <Link to='/Payments/New'>
         <button className={styles.action}>Add a Payment</button>
       </Link>
       <button className={styles.action}>Add a Lien</button>

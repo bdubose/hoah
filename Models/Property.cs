@@ -12,4 +12,6 @@ public class Property
     public string? Sector { get; set; }
     public string? MapBook { get; set; }
     public string? Page { get; set; }
+    
+    [Write(false)] public string? Homeowner { get; set; }
 }

@@ -15,10 +15,8 @@
 }
 
 .row:hover {
-    background-color: var(--primary-hover);
-    box-shadow: 0 0 10px var(--primary-hover);
-    
-    cursor: pointer;
+    background-color: var(--dark-bg);
+    box-shadow: 0 0 10px var(--dark-bg);
 }
 
 .cell {

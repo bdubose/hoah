@@ -3,7 +3,8 @@ import { useGetAllPropertiesQuery, useGetHomeownerQuery, useUpdateHomeownerMutat
 import { skipToken } from "@reduxjs/toolkit/query";
 import { useObjectState } from "../../hooks.ts";
 import { Homeowner } from "../../models/Homeowner.ts";
-import { FormEvent } from "react";
+import { FormEvent, useEffect } from "react";
+import { isoDate } from "../../utils.ts";
 
 export const HomeownersEdit = () => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ export const HomeownersEdit = () => {
   const { data: currentHo } = useGetHomeownerQuery(isNaN(id) ? skipToken : id);
   const [ updateHomeowner ] = useUpdateHomeownerMutation();
 
-  const [ editHo, setEditHo ] = useObjectState(currentHo ?? {
+  const [ editHo, setEditHo, setState ] = useObjectState(currentHo ?? {
     homeownerId: 0,
     property: '',
     fullName: '',
@@ -22,6 +23,15 @@ export const HomeownersEdit = () => {
     moveInDate: '',
     moveOutDate: '',
   } as Homeowner);
+  
+  useEffect(() => {
+    if (currentHo) {
+      let cho = { ... currentHo };
+      cho.moveInDate = isoDate(new Date(cho.moveInDate));
+      cho.moveOutDate = cho.moveOutDate ? isoDate(new Date(cho.moveOutDate)) : '';
+      setState(cho);
+    }
+  }, [currentHo])
 
   const save = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

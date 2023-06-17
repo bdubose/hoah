@@ -15,6 +15,10 @@ export const PropertiesList = () => {
       { title: 'Id', value: prop => prop.propertyId },
       { title: 'Street Number', value: prop => prop.streetNumber },
       { title: 'Street', value: prop => prop.street },
+      { title: 'Homeowner', value: prop => prop.homeowner },
+      { title: '', value: prop => <>
+          <Link to={`/Properties/${prop.propertyId}`}>Edit</Link>
+      </>}
     ]}/>
   </>
 }

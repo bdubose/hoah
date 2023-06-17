@@ -1,8 +1,9 @@
 ﻿import styles from './Grid.module.css';
+import { ReactElement } from "react";
 
 interface ColumnConfig<T> {
   title: string,
-  value: (entity: T) => string | number  | undefined
+  value: (entity: T) => string | number | ReactElement | undefined
 }
 
 interface GridProps<T> {

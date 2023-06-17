@@ -3,7 +3,7 @@ import { useGetPropertyQuery, useUpdatePropertyMutation } from "../../api.ts";
 import { skipToken } from "@reduxjs/toolkit/query";
 import { useObjectState } from "../../hooks.ts";
 import { Property } from "../../models/Property.ts";
-import { FormEvent } from "react";
+import { FormEvent, useEffect } from "react";
 
 const streets = [
   'Fieldstone Drive',
@@ -26,11 +26,17 @@ export const PropertiesEdit = () => {
   const { data: currentProp } = useGetPropertyQuery(isNaN(id) ? skipToken : id);
   const [ updateProperty ] = useUpdatePropertyMutation();
   
-  const [ editProp, setEditProp ] = useObjectState(currentProp ?? {
+  const [ editProp, setEditProp, setState ] = useObjectState(currentProp ?? {
     propertyId: 0,
     streetNumber: 0,
     street: '',
   });
+  
+  useEffect(() => {
+    if (currentProp) {
+      setState(currentProp);
+    }
+  }, [currentProp]);
 
   const save = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

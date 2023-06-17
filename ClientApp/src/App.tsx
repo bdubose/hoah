@@ -6,7 +6,7 @@ import { Layout } from "./Layout.tsx";
 import { LiensList } from "./routes/liens/LiensList.tsx";
 import { HomeownersList } from "./routes/homeowners/HomeownersList.tsx";
 import { HomeownersEdit } from "./routes/homeowners/HomeownersEdit.tsx";
-import { CreatePayment } from "./routes/payments/CreatePayment.tsx";
+import { NewPayment } from "./routes/payments/NewPayment.tsx";
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
 
           <Route path='/Liens' element={<LiensList/>}/>
 
-          <Route path='/Payments/Create' element={<CreatePayment/>}/>
+          <Route path='/Payments/New' element={<NewPayment/>}/>
           
           <Route path='/Properties' element={<PropertiesList/>}/>
           <Route path='/Properties/:action' element={<PropertiesEdit/>}/>

@@ -15,7 +15,7 @@ const initialState = {
   homeowner: '',
 } as const as Payment;
 
-export const CreatePayment = () => {
+export const NewPayment = () => {
   const navigate = useNavigate();
   
   const { data: homeowners } = useGetAllHomeownersQuery();
