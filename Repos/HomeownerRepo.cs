@@ -12,18 +12,18 @@ public class HomeownerRepo : BaseRepo
     {
         using var con = Db.Con;
         return await con.QueryAsync<Homeowner>(@"
-            select h.*, concat(p.street_number, ' ', p.street) as property
+            select h.*, concat(p.streetNumber, ' ', p.street) as property
             from homeowners h
-            join properties p on h.property_id = p.property_id");
+            join properties p on h.PropertyId = p.Id");
     }
     public async Task<Homeowner> GetById(int id)
     {
         using var con = Db.Con;
         return await con.QuerySingleAsync<Homeowner>(@"
-            select h.*, concat(p.street_number, ' ', p.street) as property
+            select h.*, concat(p.streetNumber, ' ', p.street) as property
             from homeowners h
-            join properties p on h.property_id = p.property_id
-            where h.homeowner_id = @id",
+            join properties p on h.PropertyId = p.Id
+            where h.Id = @id",
             new { id });
     }
     public async Task<HomeownerDetails> GetDetails(int id)
@@ -32,31 +32,31 @@ public class HomeownerRepo : BaseRepo
         using var multi = await con.QueryMultipleAsync(@"
             select h.*
             from homeowners h
-            where h.homeowner_id = @id
+            where h.id = @id
             ;
             select p.*
             from properties p
-            join homeowners h on p.property_id = h.property_id
-            where h.homeowner_id = @id
+            join homeowners h on p.id = h.propertyId
+            where h.Id = @id
             ;
-            select f.*, ft.fee_type_name
+            select f.*, ft.Name as FeeTypeName
             from fees f
-            join fee_types ft on f.fee_type_id = ft.fee_type_id
-            where f.homeowner_id = @id
+            join fee_types ft on f.feeTypeId = ft.id
+            where f.homeownerId = @id
             ;
             select p.*
             from payments p
-            where p.homeowner_id = @id
+            where p.homeownerId = @id
             ;
             select l.*
             from liens l
-            where l.homeowner_id = @id
+            where l.homeownerId = @id
             ;
             select n.*
             from notes n
-            join properties p on n.property_id = p.property_id
-            join homeowners h on p.property_id = h.property_id
-            where h.homeowner_id = @id",
+            join properties p on n.propertyId = p.id
+            join homeowners h on p.id = h.propertyId
+            where h.id = @id",
             new { id });
 
         var homeownerDetails = await multi.ReadSingleAsync<HomeownerDetails>();
@@ -65,7 +65,7 @@ public class HomeownerRepo : BaseRepo
         homeownerDetails.Payments = await multi.ReadAsync<Payment>();
         homeownerDetails.Liens = await multi.ReadAsync<Lien>();
         homeownerDetails.PropertyNotes = await multi.ReadAsync<Note>();
-        
+
         return homeownerDetails;
     }
 
@@ -73,9 +73,9 @@ public class HomeownerRepo : BaseRepo
     {
         using var con = Db.Con;
         return await con.QueryFirstAsync<int>(@"
-            insert into homeowners(full_name, email, property_id, move_in_date)
+            insert into homeowners(fullName, email, propertyId, moveInDate)
             values (@FullName, @Email, @PropertyId, @MoveInDate::date)
-            returning homeowner_id",
+            output Id",
             homeowner);
     }
 

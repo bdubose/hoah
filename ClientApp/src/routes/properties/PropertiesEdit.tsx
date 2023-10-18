@@ -1,72 +1,85 @@
-﻿import { useNavigate, useParams } from "react-router";
-import { useGetPropertyQuery, useUpdatePropertyMutation } from "../../api.ts";
-import { skipToken } from "@reduxjs/toolkit/query";
-import { useObjectState } from "../../hooks.ts";
-import { Property } from "../../models/Property.ts";
-import { FormEvent, useEffect } from "react";
+﻿import { useNavigate, useParams } from 'react-router';
+import { useObjectState } from '../../hooks';
+import { Property } from '../../models/Property';
+import { FormEvent, useEffect } from 'react';
+import { useProperty } from '../../api/PropertiesApi';
 
 const streets = [
-  'Fieldstone Drive',
-  'Fieldstone Circle',
-  'MacQueen Circle',
-  'Stonecroft Circle',
-  'Stonecroft Drive',
-  'Stoneridge Drive',
-  'Stoneridge Circle',
-  'Stonewood Road',
-  'Marlstone Drive',
-  'Marlstone Court'
+	'Fieldstone Drive',
+	'Fieldstone Circle',
+	'MacQueen Circle',
+	'Stonecroft Circle',
+	'Stonecroft Drive',
+	'Stoneridge Drive',
+	'Stoneridge Circle',
+	'Stonewood Road',
+	'Marlstone Drive',
+	'Marlstone Court',
 ] as const;
 
 export const PropertiesEdit = () => {
-  const navigate = useNavigate();
-  const { action } = useParams();
-  const id = Number.parseInt(action!);
+	const navigate = useNavigate();
+	const { action } = useParams();
+	const id = Number.parseInt(action!);
 
-  const { data: currentProp } = useGetPropertyQuery(isNaN(id) ? skipToken : id);
-  const [ updateProperty ] = useUpdatePropertyMutation();
-  
-  const [ editProp, setEditProp, setState ] = useObjectState(currentProp ?? {
-    propertyId: 0,
-    streetNumber: 0,
-    street: '',
-  });
-  
-  useEffect(() => {
-    if (currentProp) {
-      setState(currentProp);
-    }
-  }, [currentProp]);
+	const { data: currentProp } = useProperty(id);
+	// const [ updateProperty ] = useUpdatePropertyMutation();
 
-  const save = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+	const [editProp, setEditProp, setState] = useObjectState(
+		currentProp ?? {
+			propertyId: 0,
+			streetNumber: 0,
+			street: '',
+		}
+	);
 
-    const id = await updateProperty(editProp).unwrap();
-    navigate(`/Properties/${id}`);
-  };
+	useEffect(() => {
+		if (currentProp) {
+			setState(currentProp);
+		}
+	}, [currentProp]);
 
-  const propToString = (property: Property) =>
-      `${property.streetNumber} ${property.street}`;
+	const save = async (e: FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
 
-  return <>
-    <h1>{currentProp ? propToString(currentProp) : 'New Property'}</h1>
+		// const id = await updateProperty(editProp).unwrap();
+		// navigate(`/Properties/${id}`);
+	};
 
-    <form onSubmit={e => save(e)}>
-      <label>
-        Street Number
-        <input type="text" value={editProp.streetNumber} onChange={e => setEditProp('streetNumber', e.target.value)}/>
-      </label>
+	const propToString = (property: Property) =>
+		`${property.streetNumber} ${property.street}`;
 
-      <label>
-        Street
-        <input type="text" list='streets' value={editProp.street}
-               onChange={e => setEditProp('street', e.target.value)}/>
-        <datalist id='streets'>
-          {streets?.map(s => <option key={s}>{s}</option>)}
-        </datalist>
-      </label>
-      
-      <button>Save</button>
-    </form>
-  </>
-}
+	return (
+		<>
+			<h1>{currentProp ? propToString(currentProp) : 'New Property'}</h1>
+
+			<form onSubmit={e => save(e)}>
+				<label>
+					Street Number
+					<input
+						type="text"
+						value={editProp.streetNumber}
+						onChange={e => setEditProp('streetNumber', e.target.value)}
+					/>
+				</label>
+
+				<label>
+					Street
+					<input
+						type="text"
+						list="streets"
+						value={editProp.street}
+						onChange={e => setEditProp('street', e.target.value)}
+					/>
+					<datalist id="streets">
+						{streets?.map(s => (
+							<option key={s}>{s}</option>
+						))}
+					</datalist>
+				</label>
+
+				<button>Save</button>
+			</form>
+		</>
+	);
+};

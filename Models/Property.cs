@@ -2,7 +2,7 @@ using Dapper.Contrib.Extensions;
 
 namespace HoahServer.Models;
 
-[Table("properties")]
+[Table("Properties")]
 public class Property
 {
     [Key] public int PropertyId { get; set; }
@@ -10,8 +10,8 @@ public class Property
     public string Street { get; set; } = "";
     public string? LotNum { get; set; }
     public string? Sector { get; set; }
-    public string? MapBook { get; set; }
-    public string? Page { get; set; }
-    
+    public int? MapBook { get; set; }
+    public int? MapPage { get; set; }
+
     [Write(false)] public string? Homeowner { get; set; }
 }

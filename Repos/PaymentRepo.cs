@@ -12,8 +12,8 @@ public class PaymentRepo : BaseRepo
     {
         using var con = Db.Con;
         await con.ExecuteAsync(@"
-            insert into payments(homeowner_id, amount, date_paid, reference)
-            values (@HomeownerId, @Amount, @DatePaid::date, @Reference)",
+            insert into payments(homeownerId, amount, datePaid, reference)
+            values (@HomeownerId, @Amount, @DatePaid, @Reference)",
             payment);
     }
 }
