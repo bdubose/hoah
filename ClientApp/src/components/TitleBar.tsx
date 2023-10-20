@@ -6,7 +6,5 @@ export const TitleBar = (props: React.HTMLProps<HTMLDivElement>) => (
 			justifyContent: 'space-between',
 			alignItems: 'baseline',
 		}}
-	>
-		{props.children}
-	</div>
+	/>
 );

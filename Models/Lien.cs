@@ -12,4 +12,5 @@ public class Lien
     public int LienStatusId { get; set; }
 
     [Write(false)] public string? LienStatus { get; set; }
+    [Write(false)] public string? OwnerAndProperty { get; set; }
 }

@@ -12,9 +12,11 @@ public class LienRepo : BaseRepo
     {
         using var con = Db.Con;
         return await con.QueryAsync<Lien>(@"
-            select l.*, ls.Name as LienStatus
+            select l.*, ls.Name as LienStatus, concat(h.FullName, ' - ', p.StreetNumber, ' ', p.Street) as OwnerAndProperty
             from Liens l
-            join LienStatuses ls on ls.Id = l.LienStatusId");
+            join LienStatuses ls on ls.Id = l.LienStatusId
+            join Homeowners h on h.Id = l.HomeownerId
+            join Properties p on p.Id = h.PropertyId");
     }
 
     public async Task<int> Add(Lien lien)

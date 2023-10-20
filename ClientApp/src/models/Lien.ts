@@ -6,6 +6,6 @@
 	lienStatusId: number;
 
 	// virtual fields
-	homeowner?: string;
 	lienStatus?: string;
+	ownerAndProperty?: string;
 }

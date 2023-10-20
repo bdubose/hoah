@@ -18,7 +18,7 @@ export const LiensList = () => {
 				entities={liens ?? []}
 				config={[
 					{ title: 'Id', value: lien => lien.id },
-					{ title: 'Property Owner Id', value: lien => lien.homeownerId },
+					{ title: 'Owner', value: lien => lien.ownerAndProperty },
 					{ title: 'Amount', value: lien => lien.amount },
 					{ title: 'Year', value: lien => lien.lienYear },
 					{ title: 'Status', value: lien => lien.lienStatus },
