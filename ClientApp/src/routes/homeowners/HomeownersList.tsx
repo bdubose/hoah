@@ -17,7 +17,7 @@ export const HomeownersList = () => {
 			<Grid
 				entities={homeowners ?? []}
 				config={[
-					{ title: 'Id', value: ho => ho.homeownerId },
+					{ title: 'Id', value: ho => ho.id },
 					{ title: 'Property', value: ho => ho.property },
 					{ title: 'Name', value: ho => ho.fullName },
 					{ title: 'Email', value: ho => ho.email },
@@ -25,10 +25,8 @@ export const HomeownersList = () => {
 						title: '',
 						value: ho => (
 							<>
-								<Link to={`/Homeowners/${ho.homeownerId}`}>Edit</Link>
-								<Link to={`/Homeowners/Details/${ho.homeownerId}`}>
-									Details
-								</Link>
+								<Link to={`/Homeowners/${ho.id}`}>Edit</Link>
+								<Link to={`/Homeowners/Details/${ho.id}`}>Details</Link>
 							</>
 						),
 					},

@@ -19,5 +19,6 @@ export const useProperty = (id: number) =>
 
 export const useUpdateProperty = (prop: Property) =>
 	useMutation({
-		mutationFn: async () => await apiClient.post('/Properties', prop),
+		mutationFn: async () =>
+			(await apiClient.post<number>('/Properties', prop)).data,
 	});

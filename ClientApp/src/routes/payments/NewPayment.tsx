@@ -4,9 +4,10 @@ import { isoDate } from '../../utils';
 import { Payment } from '../../models/Payment';
 import { useNavigate } from 'react-router';
 import { useAllHomeowners } from '../../api/HomeownersApi';
+import { useAddPayment } from '../../api/PaymentsApi';
 
 const initialState = {
-	paymentId: 0,
+	id: 0,
 	homeownerId: 0,
 	amount: 150,
 	datePaid: isoDate(new Date()),
@@ -22,24 +23,26 @@ export const NewPayment = () => {
 	// const [addPayment] = useAddPaymentMutation();
 
 	const [payment, setPayment, setState] = useObjectState(initialState);
+	const homeowner = homeowners?.find(
+		h => `${h.property} - ${h.fullName}` === payment.homeowner
+	);
+
+	const { mutateAsync: addPayment } = useAddPayment({
+		...payment,
+		homeownerId: homeowner?.id ?? -1,
+	});
 
 	const save = async (e?: FormEvent, goToProperty: boolean = true) => {
 		e?.preventDefault();
-		const homeowner = homeowners?.find(
-			h => `${h.property} - ${h.fullName}` === payment.homeowner
-		);
 		if (!homeowner) {
 			alert('Homeowner not found!');
 			return;
 		}
 
-		// await addPayment({
-		// 	...payment,
-		// 	homeownerId: homeowner.homeownerId,
-		// }).unwrap();
+		await addPayment();
 
 		if (goToProperty) {
-			navigate(`/Homeowners/Details/${homeowner.homeownerId}`);
+			navigate(`/Homeowners/Details/${homeowner.id}`);
 		} else {
 			setState(initialState);
 		}
@@ -60,7 +63,7 @@ export const NewPayment = () => {
 					/>
 					<datalist id="homeowners">
 						{homeowners?.map(h => (
-							<option key={h.homeownerId}>
+							<option key={h.id}>
 								{h.property} - {h.fullName}
 							</option>
 						))}

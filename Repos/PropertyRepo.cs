@@ -32,8 +32,8 @@ public class PropertyRepo : BaseRepo
         using var con = Db.Con;
         return await con.QuerySingleAsync<int>(@"
             insert into properties(StreetNumber, Street)
-            values (@StreetNumber, @Street)
-            output Id",
+            output inserted.id
+            values (@StreetNumber, @Street)",
             property);
     }
 }

@@ -16,7 +16,7 @@ export const PropertiesList = () => {
 			<Grid
 				entities={properties ?? []}
 				config={[
-					{ title: 'Id', value: prop => prop.propertyId },
+					{ title: 'Id', value: prop => prop.id },
 					{ title: 'Street Number', value: prop => prop.streetNumber },
 					{ title: 'Street', value: prop => prop.street },
 					{ title: 'Homeowner', value: prop => prop.homeowner },
@@ -24,7 +24,7 @@ export const PropertiesList = () => {
 						title: '',
 						value: prop => (
 							<>
-								<Link to={`/Properties/${prop.propertyId}`}>Edit</Link>
+								<Link to={`/Properties/${prop.id}`}>Edit</Link>
 							</>
 						),
 					},

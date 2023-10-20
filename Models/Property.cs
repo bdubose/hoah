@@ -5,7 +5,7 @@ namespace HoahServer.Models;
 [Table("Properties")]
 public class Property
 {
-    [Key] public int PropertyId { get; set; }
+    [Key] public int Id { get; set; }
     public int StreetNumber { get; set; }
     public string Street { get; set; } = "";
     public string? LotNum { get; set; }

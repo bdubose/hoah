@@ -2,7 +2,7 @@
 import { useObjectState } from '../../hooks';
 import { Property } from '../../models/Property';
 import { FormEvent, useEffect } from 'react';
-import { useProperty } from '../../api/PropertiesApi';
+import { useProperty, useUpdateProperty } from '../../api/PropertiesApi';
 
 const streets = [
 	'Fieldstone Drive',
@@ -23,27 +23,27 @@ export const PropertiesEdit = () => {
 	const id = Number.parseInt(action!);
 
 	const { data: currentProp } = useProperty(id);
-	// const [ updateProperty ] = useUpdatePropertyMutation();
 
 	const [editProp, setEditProp, setState] = useObjectState(
 		currentProp ?? {
-			propertyId: 0,
+			id: 0,
 			streetNumber: 0,
 			street: '',
 		}
 	);
+	const { mutateAsync: updateProperty } = useUpdateProperty(editProp);
 
 	useEffect(() => {
 		if (currentProp) {
 			setState(currentProp);
 		}
-	}, [currentProp]);
+	}, [currentProp, setState]);
 
 	const save = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		// const id = await updateProperty(editProp).unwrap();
-		// navigate(`/Properties/${id}`);
+		const id = await updateProperty();
+		navigate(`/Properties/${id}`);
 	};
 
 	const propToString = (property: Property) =>

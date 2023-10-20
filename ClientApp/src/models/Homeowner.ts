@@ -5,7 +5,7 @@ import { Fee } from './Fee';
 import { Note } from './Note';
 
 export interface Homeowner {
-	homeownerId: number;
+	id: number;
 	propertyId: number;
 	fullName: string;
 	email: string;
@@ -18,7 +18,7 @@ export interface Homeowner {
 
 export interface HomeownerDetails {
 	// can't inherit bc type of property changes
-	homeownerId: number;
+	id: number;
 	propertyId: number;
 	fullName: string;
 	email: string;

@@ -5,7 +5,7 @@ namespace HoahServer.Models;
 [Table("Liens")]
 public class Lien
 {
-    [Key] public int LienId { get; set; }
+    [Key] public int Id { get; set; }
     public int PropertyOwnerId { get; set; }
     public decimal Amount { get; set; }
     public int LienYear { get; set; }

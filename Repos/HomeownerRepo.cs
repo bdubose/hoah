@@ -41,7 +41,7 @@ public class HomeownerRepo : BaseRepo
             ;
             select f.*, ft.Name as FeeTypeName
             from fees f
-            join fee_types ft on f.feeTypeId = ft.id
+            join FeeTypes ft on f.feeTypeId = ft.id
             where f.homeownerId = @id
             ;
             select p.*
@@ -74,8 +74,8 @@ public class HomeownerRepo : BaseRepo
         using var con = Db.Con;
         return await con.QueryFirstAsync<int>(@"
             insert into homeowners(fullName, email, propertyId, moveInDate)
-            values (@FullName, @Email, @PropertyId, @MoveInDate::date)
-            output Id",
+            output inserted.Id
+            values (@FullName, @Email, @PropertyId, @MoveInDate)",
             homeowner);
     }
 

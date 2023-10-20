@@ -10,7 +10,7 @@ export const LiensList = () => {
 			<Grid
 				entities={liens ?? []}
 				config={[
-					{ title: 'Id', value: lien => lien.lienId },
+					{ title: 'Id', value: lien => lien.id },
 					{ title: 'Property Owner Id', value: lien => lien.propertyOwnerId },
 					{ title: 'Amount', value: lien => lien.amount },
 					{ title: 'Year', value: lien => lien.lienYear },

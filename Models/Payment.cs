@@ -5,7 +5,7 @@ namespace HoahServer.Models;
 [Table("Payments")]
 public class Payment
 {
-    [Key] public int PaymentId { get; set; }
+    [Key] public int Id { get; set; }
     public int HomeownerId { get; set; }
     public decimal Amount { get; set; }
     public string? DatePaid { get; set; }

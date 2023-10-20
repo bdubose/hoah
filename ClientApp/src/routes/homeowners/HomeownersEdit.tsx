@@ -13,12 +13,11 @@ export const HomeownersEdit = () => {
 
 	const { data: properties } = useAllProperties();
 	const { data: currentHo } = useHomeowner(id);
-	// const [updateHomeowner] = useUpdateHomeowner();
 
 	const [editHo, setEditHo, setState] = useObjectState(
 		currentHo ??
 			({
-				homeownerId: 0,
+				id: 0,
 				property: '',
 				fullName: '',
 				email: '',
@@ -26,6 +25,14 @@ export const HomeownersEdit = () => {
 				moveOutDate: '',
 			} as Homeowner)
 	);
+
+	const property = properties?.find(
+		p => `${p.streetNumber} ${p.street}` === editHo.property
+	);
+	const { mutateAsync: addHomeowner } = useUpdateHomeowner({
+		...editHo,
+		propertyId: property?.id ?? -1,
+	});
 
 	useEffect(() => {
 		if (currentHo) {
@@ -36,7 +43,7 @@ export const HomeownersEdit = () => {
 				: '';
 			setState(cho);
 		}
-	}, [currentHo]);
+	}, [currentHo, setState]);
 
 	const save = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -47,10 +54,8 @@ export const HomeownersEdit = () => {
 			window.alert("Couldn't find property! Try again.");
 			return;
 		}
-		// const id = await updateHomeowner({
-		// 	...editHo,
-		// 	propertyId: property.propertyId,
-		// }).unwrap();
+
+		const id = await addHomeowner();
 		navigate(`/Homeowners/${id}`);
 	};
 
@@ -87,7 +92,7 @@ export const HomeownersEdit = () => {
 					/>
 					<datalist id="properties">
 						{properties?.map(p => (
-							<option key={p.propertyId}>
+							<option key={p.id}>
 								{p.streetNumber} {p.street}
 							</option>
 						))}
