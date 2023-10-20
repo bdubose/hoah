@@ -1,5 +1,7 @@
 ﻿import { useParams } from 'react-router';
 import { useHomeownerDetails } from '../../../api/HomeownersApi';
+import { Grid } from '../../../components/Grid';
+import { dollarFormat } from '../../../utils';
 
 export const HomeownersDetails = () => {
 	const { id } = useParams();
@@ -25,6 +27,19 @@ export const HomeownersDetails = () => {
 			{ho.moveOutDate && (
 				<h3>Move Out: {new Date(ho.moveOutDate).toLocaleDateString()}</h3>
 			)}
+			<hr />
+			<h3>Payments</h3>
+			<Grid
+				entities={ho.payments}
+				config={[
+					{ title: 'Id', value: p => p.id },
+					{ title: 'Amount', value: p => dollarFormat(p.amount) },
+					{
+						title: 'Date Paid',
+						value: p => new Date(p.datePaid).toLocaleDateString(),
+					},
+				]}
+			/>
 		</>
 	);
 };
