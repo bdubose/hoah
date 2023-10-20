@@ -28,6 +28,20 @@ export const HomeownersDetails = () => {
 				<h3>Move Out: {new Date(ho.moveOutDate).toLocaleDateString()}</h3>
 			)}
 			<hr />
+			{ho.liens?.length && (
+				<>
+					<h3>Liens</h3>
+					<Grid
+						entities={ho.liens}
+						config={[
+							{ title: 'Year', value: l => l.lienYear },
+							{ title: 'Amount', value: l => dollarFormat(l.amount) },
+							{ title: 'Status', value: l => l.lienStatus },
+						]}
+					/>
+					<hr />
+				</>
+			)}
 			<h3>Payments</h3>
 			<Grid
 				entities={ho.payments}

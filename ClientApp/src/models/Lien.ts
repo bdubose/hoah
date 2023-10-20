@@ -1,7 +1,11 @@
 ﻿export interface Lien {
 	id: number;
-	propertyOwnerId: number;
+	homeownerId: number;
 	amount: number;
 	lienYear: number;
-	isPaid: boolean;
+	lienStatusId: number;
+
+	// virtual fields
+	homeowner?: string;
+	lienStatus?: string;
 }

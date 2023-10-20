@@ -6,8 +6,10 @@ namespace HoahServer.Models;
 public class Lien
 {
     [Key] public int Id { get; set; }
-    public int PropertyOwnerId { get; set; }
+    public int HomeownerId { get; set; }
     public decimal Amount { get; set; }
     public int LienYear { get; set; }
-    public bool IsPaid { get; set; }
+    public int LienStatusId { get; set; }
+
+    [Write(false)] public string? LienStatus { get; set; }
 }

@@ -8,6 +8,7 @@ import { HomeownersList } from './routes/homeowners/HomeownersList';
 import { HomeownersEdit } from './routes/homeowners/HomeownersEdit';
 import { NewPayment } from './routes/payments/NewPayment';
 import { HomeownersDetails } from './routes/homeowners/details/HomeownersDetails';
+import { AddLien } from './routes/liens/AddLien';
 
 function App() {
 	return (
@@ -20,6 +21,7 @@ function App() {
 				<Route path="/Homeowners/Details/:id" element={<HomeownersDetails />} />
 
 				<Route path="/Liens" element={<LiensList />} />
+				<Route path="/Liens/New" element={<AddLien />} />
 
 				<Route path="/Payments/New" element={<NewPayment />} />
 

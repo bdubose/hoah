@@ -1,18 +1,18 @@
 ﻿import { useAllProperties } from '../../api/PropertiesApi';
 import { Grid } from '../../components/Grid';
-import styles from './PropertiesList.module.css';
+import { TitleBar } from '../../components/TitleBar';
 import { Link } from 'react-router-dom';
 export const PropertiesList = () => {
 	const { data: properties } = useAllProperties();
 
 	return (
 		<>
-			<div className={styles.titleBar}>
+			<TitleBar>
 				<h1>Properties</h1>
 				<Link to="/Properties/New" className="button">
 					Add Property
 				</Link>
-			</div>
+			</TitleBar>
 			<Grid
 				entities={properties ?? []}
 				config={[

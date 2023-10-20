@@ -11,3 +11,16 @@ on src.Name = tgt.Name
 when not matched by target then
 	insert (Name) values (src.Name)
 ;
+
+merge LienStatuses as tgt using
+( values
+	('Submitted'),
+	('Active'),
+	('Paid'),
+	('Satisfaction Sent'),
+	('Closed')
+) src(Name)
+on src.Name = tgt.Name
+when not matched by target then
+	insert (Name) values (src.Name)
+;

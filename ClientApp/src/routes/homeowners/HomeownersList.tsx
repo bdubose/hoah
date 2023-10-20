@@ -1,19 +1,19 @@
 ﻿import { Grid } from '../../components/Grid';
 import { Link } from 'react-router-dom';
-import styles from './HomeownersList.module.css';
 import { useAllHomeowners } from '../../api/HomeownersApi';
+import { TitleBar } from '../../components/TitleBar';
 
 export const HomeownersList = () => {
 	const { data: homeowners } = useAllHomeowners();
 
 	return (
 		<>
-			<div className={styles.titleBar}>
+			<TitleBar>
 				<h1>Homeowners</h1>
 				<Link to="/Homeowners/New" className="button">
 					Add Homeowner
 				</Link>
-			</div>
+			</TitleBar>
 			<Grid
 				entities={homeowners ?? []}
 				config={[

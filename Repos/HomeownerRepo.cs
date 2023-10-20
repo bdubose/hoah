@@ -48,8 +48,9 @@ public class HomeownerRepo : BaseRepo
             from payments p
             where p.homeownerId = @id
             ;
-            select l.*
+            select l.*, ls.Name as LienStatus
             from liens l
+            join LienStatuses ls on ls.Id = l.LienStatusId
             where l.homeownerId = @id
             ;
             select n.*
