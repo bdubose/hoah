@@ -9,3 +9,8 @@
 	lienStatus?: string;
 	ownerAndProperty?: string;
 }
+
+export interface LienStatus {
+	id: number;
+	name: string;
+}

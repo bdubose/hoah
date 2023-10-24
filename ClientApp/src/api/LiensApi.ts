@@ -1,8 +1,8 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { Lien } from '../models/Lien';
+import { Lien, LienStatus } from '../models/Lien';
 import { apiClient } from './apiUtils';
 
-const queryKey = 'Liens';
+export const queryKey = 'Liens';
 
 export const useAllLiens = () =>
 	useQuery({
@@ -13,4 +13,17 @@ export const useAllLiens = () =>
 export const useAddLien = () =>
 	useMutation({
 		mutationFn: async (lien: Lien) => await apiClient.post('/Liens', lien),
+	});
+
+export const useUpdateLienStatus = () =>
+	useMutation({
+		mutationFn: async (body: { lienId: number; lienStatusId: number }) =>
+			await apiClient.post('/Liens/Status', body),
+	});
+
+export const useGetLienStatuses = () =>
+	useQuery({
+		queryKey: [queryKey, 'statuses'],
+		queryFn: async () =>
+			(await apiClient.get<LienStatus[]>('/Liens/Statuses')).data,
 	});

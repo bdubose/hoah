@@ -21,9 +21,21 @@ public class LiensController : ControllerBase
         return await _liens.GetAll();
     }
 
+    [HttpGet("Statuses")]
+    public async Task<IEnumerable<LienStatus>> GetAllStatuses()
+    {
+        return await _liens.GetAllStatuses();
+    }
+
     [HttpPost]
     public async Task<int> Add([FromBody] Lien lien)
     {
         return await _liens.Add(lien);
+    }
+
+    [HttpPost("Status")]
+    public async Task UpdateStatus([FromBody] LienStatusUpdate body)
+    {
+        await _liens.UpdateStatus(body);
     }
 }

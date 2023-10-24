@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Dapper.Contrib.Extensions;
 using HoahServer.Models;
 using HoahServer.Services;
 
@@ -10,7 +11,7 @@ public class LienRepo : BaseRepo
 
     public async Task<IEnumerable<Lien>> GetAll()
     {
-        using var con = Db.Con;
+        await using var con = Db.Con;
         return await con.QueryAsync<Lien>(@"
             select l.*, ls.Name as LienStatus, concat(h.FullName, ' - ', p.StreetNumber, ' ', p.Street) as OwnerAndProperty
             from Liens l
@@ -19,9 +20,15 @@ public class LienRepo : BaseRepo
             join Properties p on p.Id = h.PropertyId");
     }
 
+    public async Task<IEnumerable<LienStatus>> GetAllStatuses()
+    {
+        await using var con = Db.Con;
+        return await con.GetAllAsync<LienStatus>();
+    }
+
     public async Task<int> Add(Lien lien)
     {
-        using var con = Db.Con;
+        await using var con = Db.Con;
         return await con.QueryFirstAsync<int>(@"
             insert into Liens(HomeownerId, LienStatusId, Amount, LienYear)
             output inserted.Id
@@ -29,5 +36,15 @@ public class LienRepo : BaseRepo
             from LienStatuses ls
             where ls.Name = 'Submitted'",
             lien);
+    }
+
+    public async Task UpdateStatus(LienStatusUpdate lsu)
+    {
+        await using var con = Db.Con;
+        await con.ExecuteAsync(@"
+            update Liens
+            set LienStatusId = @LienStatusId
+            where Id = @LienId",
+            lsu);
     }
 }

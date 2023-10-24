@@ -14,3 +14,16 @@ public class Lien
     [Write(false)] public string? LienStatus { get; set; }
     [Write(false)] public string? OwnerAndProperty { get; set; }
 }
+
+[Table("LienStatuses")]
+public class LienStatus
+{
+    [Key] public int Id { get; set; }
+    public string Name { get; set; } = "";
+}
+
+public class LienStatusUpdate
+{
+    public int LienId { get; set; }
+    public int LienStatusId { get; set; }
+}
