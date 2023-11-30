@@ -9,12 +9,15 @@ import { HomeownersEdit } from './routes/homeowners/HomeownersEdit';
 import { NewPayment } from './routes/payments/NewPayment';
 import { HomeownersDetails } from './routes/homeowners/details/HomeownersDetails';
 import { AddLien } from './routes/liens/AddLien';
+import { AddClosing } from './routes/closings/AddClosing';
 
 function App() {
 	return (
 		<Layout>
 			<Routes>
 				<Route path="/" element={<Home />} />
+
+				<Route path="/Closings/New" element={<AddClosing />} />
 
 				<Route path="/Homeowners" element={<HomeownersList />} />
 				<Route path="/Homeowners/:action" element={<HomeownersEdit />} />

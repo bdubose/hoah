@@ -8,7 +8,9 @@ export const Home = () => (
 		<Link to="/Liens/New">
 			<button className={styles.action}>Add a Lien</button>
 		</Link>
-		<button className={styles.action}>Add a Closing</button>
+		<Link to="/Closings/New">
+			<button className={styles.action}>Add a Closing</button>
+		</Link>
 		<button className={styles.action}>Add a Newsletter</button>
 	</div>
 );
