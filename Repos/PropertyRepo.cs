@@ -13,9 +13,9 @@ public class PropertyRepo : BaseRepo
     {
         using var con = Db.Con;
         return await con.QueryAsync<Property>(@"
-            select p.*, h.FullName as homeowner
+            select p.*, h.Full_name as homeowner
             from properties p
-            left outer join homeowners h on p.Id = h.PropertyId");
+            left outer join homeowners h on p.Id = h.Property_id");
     }
     public async Task<Property> GetById(int id)
     {
@@ -31,9 +31,9 @@ public class PropertyRepo : BaseRepo
     {
         using var con = Db.Con;
         return await con.QuerySingleAsync<int>(@"
-            insert into properties(StreetNumber, Street)
-            output inserted.id
-            values (@StreetNumber, @Street)",
+            insert into properties(Street_number, Street)
+            values (@StreetNumber, @Street)
+            returning id",
             property);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace HoahServer.Models;
 
-[Table("Notes")]
+[Table("notes")]
 public class Note
 {
     [Key] public int Id { get; set; }

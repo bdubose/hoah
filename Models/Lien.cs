@@ -2,7 +2,7 @@
 
 namespace HoahServer.Models;
 
-[Table("Liens")]
+[Table("liens")]
 public class Lien
 {
     [Key] public int Id { get; set; }
@@ -15,7 +15,7 @@ public class Lien
     [Write(false)] public string? OwnerAndProperty { get; set; }
 }
 
-[Table("LienStatuses")]
+[Table("lien_statuses")]
 public class LienStatus
 {
     [Key] public int Id { get; set; }

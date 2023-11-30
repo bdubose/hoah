@@ -2,7 +2,7 @@ using Dapper.Contrib.Extensions;
 
 namespace HoahServer.Models;
 
-[Table("Properties")]
+[Table("properties")]
 public class Property
 {
     [Key] public int Id { get; set; }

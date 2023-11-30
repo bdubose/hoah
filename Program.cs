@@ -1,6 +1,8 @@
 using HoahServer.Repos;
 using HoahServer.Services;
 
+Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

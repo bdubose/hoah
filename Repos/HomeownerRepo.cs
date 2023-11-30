@@ -12,17 +12,17 @@ public class HomeownerRepo : BaseRepo
     {
         using var con = Db.Con;
         return await con.QueryAsync<Homeowner>(@"
-            select h.*, concat(p.streetNumber, ' ', p.street) as property
+            select h.*, concat(p.street_number, ' ', p.street) as property
             from homeowners h
-            join properties p on h.PropertyId = p.Id");
+            join properties p on h.Property_id = p.Id");
     }
     public async Task<Homeowner> GetById(int id)
     {
         using var con = Db.Con;
         return await con.QuerySingleAsync<Homeowner>(@"
-            select h.*, concat(p.streetNumber, ' ', p.street) as property
+            select h.*, concat(p.street_number, ' ', p.street) as property
             from homeowners h
-            join properties p on h.PropertyId = p.Id
+            join properties p on h.property_id = p.Id
             where h.Id = @id",
             new { id });
     }
@@ -36,26 +36,26 @@ public class HomeownerRepo : BaseRepo
             ;
             select p.*
             from properties p
-            join homeowners h on p.id = h.propertyId
+            join homeowners h on p.id = h.property_id
             where h.Id = @id
             ;
             select f.*, ft.Name as FeeTypeName
             from fees f
-            join FeeTypes ft on f.feeTypeId = ft.id
+            join Fee_types ft on f.fee_type_id = ft.id
             where f.homeownerId = @id
             ;
             select p.*
             from payments p
-            where p.homeownerId = @id
+            where p.homeowner_id = @id
             ;
             select l.*, ls.Name as LienStatus
             from liens l
-            join LienStatuses ls on ls.Id = l.LienStatusId
+            join Lien_statuses ls on ls.Id = l.Lien_status_id
             where l.homeownerId = @id
             ;
             select n.*
             from notes n
-            join properties p on n.propertyId = p.id
+            join properties p on n.property_id = p.id
             join homeowners h on p.id = h.propertyId
             where h.id = @id",
             new { id });
@@ -75,8 +75,8 @@ public class HomeownerRepo : BaseRepo
         using var con = Db.Con;
         return await con.QueryFirstAsync<int>(@"
             insert into homeowners(fullName, email, propertyId, moveInDate)
-            output inserted.Id
-            values (@FullName, @Email, @PropertyId, @MoveInDate)",
+            values (@FullName, @Email, @PropertyId, @MoveInDate)
+            returning id",
             homeowner);
     }
 

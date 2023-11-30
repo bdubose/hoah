@@ -1,5 +1,6 @@
 
-using System.Data.SqlClient;
+using System.Data;
+using Npgsql;
 
 namespace HoahServer.Services;
 public class DbService
@@ -10,8 +11,8 @@ public class DbService
         _conStr = cfg.GetConnectionString("Default") ?? throw new Exception("Could not find connection string!");
     }
 
-    public SqlConnection Con
+    public IDbConnection Con
     {
-        get { return new SqlConnection(_conStr); }
+        get { return new NpgsqlConnection(_conStr); }
     }
 }
